@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AHC サービス ウェブカタログ</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="branding">
+      <h1>AHC サービスカタログ</h1>
+      <p>電子ブックのように閲覧できる総合サービスガイド</p>
+    </div>
+    <form class="search" id="search-form" role="search">
+      <label class="visually-hidden" for="search-input">サービス検索</label>
+      <input id="search-input" type="search" placeholder="キーワードで検索" autocomplete="off">
+      <button type="submit">検索</button>
+    </form>
+  </header>
+
+  <div class="layout">
+    <nav class="toc" aria-label="目次">
+      <h2>目次</h2>
+      <ul id="toc-list"></ul>
+    </nav>
+
+    <main>
+      <section class="filters" aria-label="索引">
+        <div class="filter">
+          <label for="category-filter">カテゴリ</label>
+          <select id="category-filter">
+            <option value="all">すべて</option>
+          </select>
+        </div>
+        <div class="filter">
+          <label for="delivery-filter">納期</label>
+          <select id="delivery-filter">
+            <option value="all">すべて</option>
+            <option value="same-day">即日</option>
+            <option value="1-week">1週間以内</option>
+            <option value="2-weeks">2週間以内</option>
+            <option value="1-month">1か月以内</option>
+          </select>
+        </div>
+        <div class="filter">
+          <label for="price-filter">標準料金</label>
+          <select id="price-filter">
+            <option value="all">すべて</option>
+            <option value="under-100k">10万円未満</option>
+            <option value="100-300k">10万〜30万円</option>
+            <option value="300-600k">30万〜60万円</option>
+            <option value="over-600k">60万円以上</option>
+          </select>
+        </div>
+      </section>
+
+      <section id="catalog" class="catalog" aria-label="サービス一覧"></section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <p>最新更新日: <span id="last-updated"></span></p>
+    <p>掲載内容は予告なく変更される場合があります。</p>
+  </footer>
+
+  <template id="category-template">
+    <article class="category">
+      <header class="category-header">
+        <h2></h2>
+        <p class="category-summary"></p>
+      </header>
+      <div class="services"></div>
+    </article>
+  </template>
+
+  <template id="service-card-template">
+    <article class="service-card">
+      <h3 class="service-name"></h3>
+      <p class="service-summary"></p>
+      <dl class="service-meta">
+        <div>
+          <dt>標準料金</dt>
+          <dd class="service-price"></dd>
+        </div>
+        <div>
+          <dt>納期目安</dt>
+          <dd class="service-delivery"></dd>
+        </div>
+        <div>
+          <dt>対応範囲</dt>
+          <dd class="service-scope"></dd>
+        </div>
+      </dl>
+      <details class="service-details">
+        <summary>詳細を表示</summary>
+        <ul class="service-points"></ul>
+      </details>
+      <div class="tags" aria-label="タグ一覧"></div>
+    </article>
+  </template>
+
+  <script src="data/services.js" type="module"></script>
+  <script src="scripts/app.js" type="module"></script>
+</body>
+</html>
